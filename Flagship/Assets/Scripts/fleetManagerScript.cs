@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class fleetManagerScript : MonoBehaviour
 {
@@ -28,10 +29,13 @@ public class fleetManagerScript : MonoBehaviour
 
     public GameObject resourceUI;
 
+    public bool isInCombat = true;
+
     // Start is called before the first frame update
     void Start()
     {
         gameManagerObject = GameObject.Find("GameManager");
+        FleetStatusUpdate();
         InvokeRepeating("FleetStatusUpdate", 0, 5);
         
     }
@@ -82,9 +86,31 @@ public class fleetManagerScript : MonoBehaviour
 
     public void FleetStatusUpdate()
     {
-        fleetShips = GameObject.FindGameObjectsWithTag(playerShipTag);
 
-        this.GetComponent<ResourcesManager>().updateShips(fleetShips);
+        GameObject[] fleetShipsNew = GameObject.FindGameObjectsWithTag(playerShipTag);
+
+        print("FLEETSHIPS");
+        foreach(var ship in fleetShips)
+        {
+            print(ship);
+        }
+
+        print("FLEETSHIPSNEW");
+        foreach (var ship in fleetShipsNew)
+        {
+            print(ship);
+        }
+
+        print(fleetShips.SequenceEqual(fleetShipsNew));
+
+        
+        if(!fleetShips.SequenceEqual(fleetShipsNew))
+        {
+            fleetShips = fleetShipsNew;
+            this.GetComponent<ResourcesManager>().updateShips(fleetShips);
+        }
+
+        
 
         /*foreach (GameObject fleetShip in fleetShips)
         {
@@ -102,7 +128,7 @@ public class fleetManagerScript : MonoBehaviour
 
     }
 
-    
+
 
     public void AddShipToSelection(GameObject newShip)
     {
@@ -152,7 +178,6 @@ public class fleetManagerScript : MonoBehaviour
                 ship.GetComponent<shipStatsManagerScript>().ChangeJumpSetting(newSetting);
             }
         }
-
 
     }
 }

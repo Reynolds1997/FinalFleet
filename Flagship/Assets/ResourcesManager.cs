@@ -25,21 +25,51 @@ public class ResourcesManager : MonoBehaviour
     int selectedShipMaxHull;
 
     GameObject selectedShip;
+
+    public bool isInCombat = true;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        resourcesUI.SetActive(true);
+        changeShip(0);
+        resourcesUI.SetActive(resourcesUIEnabled);
     }
+
+    
 
     // Update is called once per frame
     void Update()
     {
-        
+                
     }
 
     public void toggleResourceUI()
     {
-        resourcesUIEnabled = !resourcesUIEnabled;
+        if (!isInCombat)
+        {
+            if(resourcesUIEnabled == true)
+            {
+                disableResourceUI();
+            }
+            else
+            {
+                enableResourceUI();
+
+            }
+        }
+        
+    }
+
+    public void enableResourceUI()
+    {
+        resourcesUIEnabled = true;
+        resourcesUI.SetActive(resourcesUIEnabled);
+    }
+
+    public void disableResourceUI()
+    {
+        resourcesUIEnabled = false;
         resourcesUI.SetActive(resourcesUIEnabled);
     }
 
@@ -53,8 +83,14 @@ public class ResourcesManager : MonoBehaviour
         }
         resourcesUI.GetComponentInChildren<TMPro.TMP_Dropdown>().ClearOptions();
         resourcesUI.GetComponentInChildren<TMPro.TMP_Dropdown>().AddOptions(fleetShipsList);
+        changeShip(0);
+        
 
-        //NOTE: The UI should really only update when there's a change in the fleet - usually when a ship is destroyed.
+        //TODO
+        //NOTE: The UI should really only update when there's a change in the fleet - usually when a ship is destroyed. Right now, it'll update away from the ship that's selected.
+        //FIX THIS.
+
+        //UPDATE: It's partially fixed. Still not perfect. See fleetManagerScript's updateShips method for changes.
     }
 
 
@@ -63,7 +99,7 @@ public class ResourcesManager : MonoBehaviour
         TMPro.TMP_Dropdown dropDown = resourcesUI.GetComponentInChildren<TMPro.TMP_Dropdown>();
 
         string shipName = dropDown.options[dropDown.value].text;
-        print(shipName);
+        //print(shipName);
 
         foreach (GameObject ship in fleetShipsArray)
         {
