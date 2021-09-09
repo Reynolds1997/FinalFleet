@@ -159,6 +159,7 @@ public class shipStatsManagerScript : MonoBehaviour
 
         agent.Warp(agent.destination);
         
+        //TODO: there's a bug where the ships will periodically get jumped in at their origin points, not at their destinations. Try and resolve this.
        // print(this.name + " Current Position " + this.transform.position);
     }
 

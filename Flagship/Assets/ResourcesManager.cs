@@ -26,7 +26,7 @@ public class ResourcesManager : MonoBehaviour
 
     GameObject selectedShip;
 
-    public bool isInCombat = true;
+    public bool isInCombat = false;
 
     // Start is called before the first frame update
     void Start()
