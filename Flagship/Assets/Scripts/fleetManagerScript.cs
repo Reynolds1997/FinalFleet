@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class fleetManagerScript : MonoBehaviour
 {
@@ -19,11 +20,13 @@ public class fleetManagerScript : MonoBehaviour
     public bool hasSWACS;
 
     private bool fleetJumped = false;
-    private float jumpInWaitSeconds = 5;
+    private float jumpInWaitSeconds = 3;
 
     public int jumpedShipsCounter = 0;
 
     public GameObject[] fleetShips;
+
+    public GameObject resourceUI;
 
     // Start is called before the first frame update
     void Start()
@@ -47,13 +50,16 @@ public class fleetManagerScript : MonoBehaviour
 
         if(jumpedShipsCounter == fleetShips.Length)
         {
-            jumpFleet();
+            StartCoroutine(jumpFleet());
         }
     }
 
-    public void jumpFleet()
+    IEnumerator jumpFleet()
     {
-        gameManagerObject.GetComponent<sceneManagerScript>().loadScene();
+
+        yield return new WaitForSeconds(jumpInWaitSeconds);
+
+        gameManagerObject.GetComponent<sceneManagerScript>().LoadScene();
 
 
         StartCoroutine(jumpFleetCoroutine());
@@ -73,9 +79,11 @@ public class fleetManagerScript : MonoBehaviour
 
     }
 
-    void FleetStatusUpdate()
+    public void FleetStatusUpdate()
     {
         fleetShips = GameObject.FindGameObjectsWithTag(playerShipTag);
+
+        this.GetComponent<ResourcesManager>().updateShips(fleetShips);
 
         /*foreach (GameObject fleetShip in fleetShips)
         {
@@ -93,6 +101,8 @@ public class fleetManagerScript : MonoBehaviour
 
     }
 
+    
+
     public void AddShipToSelection(GameObject newShip)
     {
         selectedShips.Add(newShip);
@@ -109,6 +119,8 @@ public class fleetManagerScript : MonoBehaviour
         if (selectedShips.Count > 0)
         {
             bool newSetting = false;
+            //TODO
+            //What happens if the ship is destroyed? Fix this!
             if (selectedShips[0].GetComponent<shipMovementScript>().defensiveFire == false)
             {
                 newSetting = true;

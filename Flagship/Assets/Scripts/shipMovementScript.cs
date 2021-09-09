@@ -85,11 +85,7 @@ public class shipMovementScript : MonoBehaviour
                         //If object clicked on is an enemy ship, lock weapons and engage. 
                         if (hitObject.CompareTag(enemyShipTag))
                         {
-                            
-                            foreach(GameObject weapon in shipWeapons)
-                            {
-                                weapon.GetComponent<shipCannonScript>().targetShip = hitObject;
-                            }
+                            SetTarget(hitObject);
                             isEngaging = true;
 
                             targetShip.GetComponent<enemyBehaviorScript>().shipsTargetingThisShip += 1;
@@ -104,6 +100,8 @@ public class shipMovementScript : MonoBehaviour
                         
                         //targetShip.GetComponent<Outline>().enabled = true;
                     }
+
+                    //If the object clicked on is the map itself
                     else
                     {
                         
@@ -127,10 +125,9 @@ public class shipMovementScript : MonoBehaviour
                 if(targetShip == null)
                 {
                     shipNavMeshAgent.SetDestination(myRaycastHit.point);
-                    foreach (GameObject weapon in shipWeapons)
-                    {
-                        weapon.GetComponent<shipCannonScript>().targetShip = null;
-                    }
+
+                    SetTarget(null);
+                    
                     isEngaging = false;
                 }
                 
@@ -174,11 +171,13 @@ public class shipMovementScript : MonoBehaviour
             }
         }
 
+        //If there is a targetship, set it as the destination
         if(targetShip != null)
         {
             shipNavMeshAgent.SetDestination(targetShip.transform.position);
         }
 
+        //If the ship hasn't jumped out, draw a line to its destination.
         if (!this.gameObject.GetComponent<shipStatsManagerScript>().jumpedOut)
         {
             this.gameObject.GetComponent<LineRenderer>().enabled = true;
@@ -188,17 +187,28 @@ public class shipMovementScript : MonoBehaviour
         else
         {
             this.gameObject.GetComponent<LineRenderer>().enabled = false;
+            SetTarget(null); //This is to disable the ship's targeting after jumping, so that the scaled-down gameobject doesn't keep firing.
         }
 
 
 
-       // if (Input.GetButtonDown("FireMode") && isSelected)
-       // {
-       //     changeFireMode();
-       // }
+        // if (Input.GetButtonDown("FireMode") && isSelected)
+        // {
+        //     changeFireMode();
+        // }
+
+        
 
     }
 
+    
+    public void SetTarget(GameObject target)
+    {
+        foreach (GameObject weapon in shipWeapons)
+        {
+            weapon.GetComponent<shipCannonScript>().targetShip = target;
+        }
+    }
     public void toggleSelection()
     {
         if (isSelected)
@@ -214,13 +224,16 @@ public class shipMovementScript : MonoBehaviour
 
     public void selectShip()
     {
-        isSelected = true;
+        if(this.gameObject.GetComponent<shipStatsManagerScript>().currentHull > 0) { 
+            isSelected = true;
 
 
-        //this.GetComponent<Outline>().enabled = true;
+            //this.GetComponent<Outline>().enabled = true;
 
-        selectionRing.GetComponent<MeshRenderer>().enabled = true;
-        fleetManagerObject.GetComponent<fleetManagerScript>().AddShipToSelection(this.gameObject);
+            selectionRing.GetComponent<MeshRenderer>().enabled = true;
+            fleetManagerObject.GetComponent<fleetManagerScript>().AddShipToSelection(this.gameObject);
+
+        }
     }
     public void deselectShip()
     {

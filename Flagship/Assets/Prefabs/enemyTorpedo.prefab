@@ -5370,13 +5370,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerShipTag: playerShip
   enemyShipTag: enemyShip
-  moveSpeed: 7
-  safetyTime: 1
+  moveSpeed: 8
+  safetyTime: 0.1
   rotateSpeed: 180
   targetShip: {fileID: 0}
   torpedoDamage: 6
   torpedoModel: {fileID: 3198280862006388595}
   explosionEffect: {fileID: 6913246146122135794, guid: 25a3509173990a741aa1068b0a185626, type: 3}
+  detonationRange: 1
 --- !u!54 &3292272065130710704
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5419,6 +5420,7 @@ MonoBehaviour:
   currentFuel: 0
   currentCrew: 0
   currentMorale: 0
+  isAlive: 1
   isDerelict: 0
   deathTime: 1
   isTorpedo: 1
@@ -5436,6 +5438,10 @@ MonoBehaviour:
   fleetManagerObject: {fileID: 0}
   explosionEffect: {fileID: 0}
   preExplosionEffect: {fileID: 0}
+  shieldBubbleSize: 1
+  shieldImpactEffect: {fileID: 0}
+  hullImpactEffect: {fileID: 0}
+  jumpFlare: {fileID: 0}
 --- !u!1 &8577764549705519257
 GameObject:
   m_ObjectHideFlags: 0
@@ -5508,7 +5514,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.5
+  m_Time: 0.25
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1

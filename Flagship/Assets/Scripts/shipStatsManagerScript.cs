@@ -26,6 +26,7 @@ public class shipStatsManagerScript : MonoBehaviour
     public int currentCrew;
     public int currentMorale;
 
+    public bool isAlive = true;
     public bool isDerelict = false;
 
     public float deathTime = 0.5f;
@@ -134,12 +135,16 @@ public class shipStatsManagerScript : MonoBehaviour
 
         this.gameObject.transform.parent.gameObject.transform.localScale = new Vector3(0, 0, 0);
 
+        
+        this.gameObject.GetComponent<shipMovementScript>().SetTarget(null);
 
         fleetManagerObject.GetComponent<fleetManagerScript>().jumpedShips.Add(this.gameObject);
 
         jumpPosition = this.gameObject.transform.parent.transform.position;
 
         fleetManagerObject.GetComponent<fleetManagerScript>().jumpedShipsCounter++;
+
+
 
        // print(this.name + " Jump Position " + jumpPosition);
     }
@@ -153,6 +158,7 @@ public class shipStatsManagerScript : MonoBehaviour
         this.gameObject.transform.parent.gameObject.transform.localScale = new Vector3(1, 1, 1);
 
         agent.Warp(agent.destination);
+        
        // print(this.name + " Current Position " + this.transform.position);
     }
 
@@ -181,6 +187,12 @@ public class shipStatsManagerScript : MonoBehaviour
             }
             if (currentHull <= 0)
             {
+                isAlive = false;
+                if(this.gameObject.GetComponent<shipMovementScript>() != null)
+                {
+                    this.gameObject.GetComponent<shipMovementScript>().deselectShip();
+                }
+                
                 StartCoroutine(destroyShip());
             }
             else if (currentCrew <= 0)
@@ -217,6 +229,8 @@ public class shipStatsManagerScript : MonoBehaviour
         {
             //Trigger game over for game manager
         }
+
+        
 
         yield return new WaitForSeconds(deathTime / 2);
 
