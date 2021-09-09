@@ -14,6 +14,17 @@ public class ResourcesManager : MonoBehaviour
     public int torpedoPool = 0;
     public int personnelPool = 0;
 
+    GameObject[] fleetShipsArray;
+    List<string> fleetShipsList = new List<string>();
+
+
+    public GameObject shipHullText;
+    public GameObject fleetHullText;
+
+    int selectedShipCurrentHull;
+    int selectedShipMaxHull;
+
+    GameObject selectedShip;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,13 +45,42 @@ public class ResourcesManager : MonoBehaviour
 
     public void updateShips(GameObject[] fleetShips)
     {
-        List<string> fleetShipsList = new List<string>();
-
+        fleetShipsArray = fleetShips;
+        fleetShipsList.Clear();
         foreach (GameObject starship in fleetShips)
         {
             fleetShipsList.Add(starship.GetComponent<shipStatsManagerScript>().shipName);
         }
         resourcesUI.GetComponentInChildren<TMPro.TMP_Dropdown>().ClearOptions();
         resourcesUI.GetComponentInChildren<TMPro.TMP_Dropdown>().AddOptions(fleetShipsList);
+
+        //NOTE: The UI should really only update when there's a change in the fleet - usually when a ship is destroyed.
     }
+
+
+    public void changeShip(int shipValue)
+    {
+        TMPro.TMP_Dropdown dropDown = resourcesUI.GetComponentInChildren<TMPro.TMP_Dropdown>();
+
+        string shipName = dropDown.options[dropDown.value].text;
+        print(shipName);
+
+        foreach (GameObject ship in fleetShipsArray)
+        {
+            if(ship.GetComponent<shipStatsManagerScript>().shipName == shipName)
+            {
+                selectedShip = ship;
+            }
+        }
+
+        
+        selectedShipCurrentHull = selectedShip.GetComponent<shipStatsManagerScript>().currentHull;
+        selectedShipMaxHull = selectedShip.GetComponent<shipStatsManagerScript>().maxHull;
+
+
+        shipHullText.GetComponent<TMPro.TMP_Text>().SetText(selectedShipCurrentHull.ToString() + "/" + selectedShipMaxHull.ToString());
+        fleetHullText.GetComponent<TMPro.TMP_Text>().SetText(hullPool.ToString());
+    }
+
+
 }

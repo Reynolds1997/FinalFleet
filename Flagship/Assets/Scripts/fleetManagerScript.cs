@@ -33,6 +33,7 @@ public class fleetManagerScript : MonoBehaviour
     {
         gameManagerObject = GameObject.Find("GameManager");
         InvokeRepeating("FleetStatusUpdate", 0, 5);
+        
     }
 
     // Update is called once per frame
