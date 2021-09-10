@@ -137,6 +137,7 @@ public class shipStatsManagerScript : MonoBehaviour
 
         
         this.gameObject.GetComponent<shipMovementScript>().SetTarget(null);
+        this.gameObject.GetComponent<shipMovementScript>().SetWeaponArmStatus(false);
 
         fleetManagerObject.GetComponent<fleetManagerScript>().jumpedShips.Add(this.gameObject);
 
@@ -152,6 +153,8 @@ public class shipStatsManagerScript : MonoBehaviour
     public void jumpIn()
     {
         Instantiate(jumpFlare, agent.destination + jumpFlareOffset, this.transform.rotation);
+        this.gameObject.GetComponent<shipMovementScript>().SetWeaponArmStatus(true);
+
 
         jumpTimerCounter = Random.Range(minJumpTimer, maxJumpTimer);
         jumpedOut = false;

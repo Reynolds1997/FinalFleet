@@ -264,6 +264,13 @@ public class shipMovementScript : MonoBehaviour
         print("Defensive fire: " + defensiveFire);
     }
 
+    public void SetWeaponArmStatus(bool status)
+    {
+        foreach (GameObject weapon in shipWeapons)
+        {
+            weapon.GetComponent<shipCannonScript>().weaponArmed = status;
+        }
+    }
 
 
     void DrawLine(Vector3 start, Vector3 end, Color startColor, Color endColor)
