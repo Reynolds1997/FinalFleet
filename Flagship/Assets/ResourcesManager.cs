@@ -94,6 +94,44 @@ public class ResourcesManager : MonoBehaviour
     }
 
 
+    public void modifyShipResources(string resourceType, int amount)
+    {
+
+        if(resourceType == "hull")
+        {
+            print("Modifying hull");
+
+            //TODO: Fix weirdness with negatives. Get things to clamp to maxes and mins properly.
+            hullPool -= amount;
+
+            
+            selectedShip.GetComponent<shipStatsManagerScript>().currentHull += amount;
+            if (selectedShip.GetComponent<shipStatsManagerScript>().currentHull > selectedShip.GetComponent<shipStatsManagerScript>().maxHull)
+            {
+                hullPool += selectedShip.GetComponent<shipStatsManagerScript>().currentHull - selectedShip.GetComponent<shipStatsManagerScript>().maxHull;
+                selectedShip.GetComponent<shipStatsManagerScript>().currentHull = selectedShip.GetComponent<shipStatsManagerScript>().maxHull;
+            }
+
+            selectedShip.GetComponent<shipStatsManagerScript>().updateHullAndShieldBars();
+        }
+
+    }
+
+    public void decrementShipHull()
+    {
+        modifyShipResources("hull", -1);
+        updateUIText();
+    }
+
+    public void incrementShipHull()
+    {
+        modifyShipResources("hull", 1);
+        updateUIText();
+    }
+
+
+
+
     public void changeShip(int shipValue)
     {
         TMPro.TMP_Dropdown dropDown = resourcesUI.GetComponentInChildren<TMPro.TMP_Dropdown>();
@@ -109,7 +147,12 @@ public class ResourcesManager : MonoBehaviour
             }
         }
 
+        updateUIText();
         
+    }
+
+    public void updateUIText()
+    {
         selectedShipCurrentHull = selectedShip.GetComponent<shipStatsManagerScript>().currentHull;
         selectedShipMaxHull = selectedShip.GetComponent<shipStatsManagerScript>().maxHull;
 
@@ -117,6 +160,5 @@ public class ResourcesManager : MonoBehaviour
         shipHullText.GetComponent<TMPro.TMP_Text>().SetText(selectedShipCurrentHull.ToString() + "/" + selectedShipMaxHull.ToString());
         fleetHullText.GetComponent<TMPro.TMP_Text>().SetText(hullPool.ToString());
     }
-
 
 }

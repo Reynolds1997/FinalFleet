@@ -620,7 +620,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 145345676}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1155,14 +1155,14 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 773964729}
-  - {fileID: 76771665}
-  - {fileID: 84737350}
   - {fileID: 1994489886}
+  - {fileID: 84737350}
+  - {fileID: 76771665}
   - {fileID: 1565304531}
   - {fileID: 1863878867}
-  - {fileID: 2018355854}
-  - {fileID: 1424729251}
   - {fileID: 1247311943}
+  - {fileID: 1424729251}
+  - {fileID: 2018355854}
   - {fileID: 1931167893}
   m_Father: {fileID: 1827699433}
   m_RootOrder: 1
@@ -1387,7 +1387,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1302
+  m_Name: pb_Mesh-1306
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7275,7 +7275,7 @@ RectTransform:
   m_Children:
   - {fileID: 796279762}
   m_Father: {fileID: 145345676}
-  m_RootOrder: 8
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -7325,7 +7325,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1247311945}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2113907635}
+        m_TargetAssemblyTypeName: ResourcesManager, Assembly-CSharp
+        m_MethodName: incrementShipHull
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1247311945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8006,7 +8018,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1400
+  m_Name: pb_Mesh-1404
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -9243,7 +9255,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1594
+  m_Name: pb_Mesh-1598
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -11514,7 +11526,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 145345676}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -11745,7 +11757,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1752
+  m_Name: pb_Mesh-1756
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -11935,7 +11947,7 @@ RectTransform:
   m_Children:
   - {fileID: 1222212589}
   m_Father: {fileID: 145345676}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -11985,7 +11997,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2018355856}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2113907635}
+        m_TargetAssemblyTypeName: ResourcesManager, Assembly-CSharp
+        m_MethodName: decrementShipHull
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2018355856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13223,13 +13247,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resourcesUI: {fileID: 390221310}
-  hullPool: 0
+  hullPool: 10
   fuelPool: 0
   torpedoPool: 0
   personnelPool: 0
   shipHullText: {fileID: 1424729250}
   fleetHullText: {fileID: 1931167892}
-  isInCombat: 1
+  isInCombat: 0
 --- !u!1 &2119639573
 GameObject:
   m_ObjectHideFlags: 0

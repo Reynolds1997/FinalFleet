@@ -177,10 +177,10 @@ public class shipStatsManagerScript : MonoBehaviour
                 Instantiate(hullImpactEffect, this.transform.position, this.transform.rotation);
             }
 
-            if (hullBar != null)
-            {
-                hullBar.fillAmount = (float)currentHull / (float)maxHull;
-            }
+        //    if (hullBar != null)
+      //      {
+       //         hullBar.fillAmount = (float)currentHull / (float)maxHull;
+       //     }
 
             if (currentHull < maxHull / 3)
             {
@@ -211,18 +211,34 @@ public class shipStatsManagerScript : MonoBehaviour
             }
 
 
-            if (shieldBar != null)
-            {
-                shieldBar.fillAmount = (float)currentShields / (float)maxShields;
-            }
+          //  if (shieldBar != null)
+       //     {
+        //        shieldBar.fillAmount = (float)currentShields / (float)maxShields;
+        //    }
         }
 
         lastHit = Time.time;
-        
+
+        updateHullAndShieldBars();
 
         //print(this.name + " hull: " + currentHull);
     }
 
+
+
+
+    public void updateHullAndShieldBars()
+    {
+        if (hullBar != null)
+        {
+            hullBar.fillAmount = (float)currentHull / (float)maxHull;
+        }
+
+        if (shieldBar != null)
+        {
+            shieldBar.fillAmount = (float)currentShields / (float)maxShields;
+        }
+    }
     public IEnumerator destroyShip()
     {
         //print("Destroying " + this.name);
