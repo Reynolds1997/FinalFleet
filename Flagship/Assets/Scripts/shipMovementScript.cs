@@ -204,10 +204,14 @@ public class shipMovementScript : MonoBehaviour
     
     public void SetTarget(GameObject target)
     {
-        foreach (GameObject weapon in shipWeapons)
+        if(shipWeapons != null)
         {
-            weapon.GetComponent<shipCannonScript>().targetShip = target;
+            foreach (GameObject weapon in shipWeapons)
+            {
+                weapon.GetComponent<shipCannonScript>().targetShip = target;
+            }
         }
+        
     }
     public void toggleSelection()
     {
@@ -229,7 +233,7 @@ public class shipMovementScript : MonoBehaviour
 
 
             //this.GetComponent<Outline>().enabled = true;
-
+            
             selectionRing.GetComponent<MeshRenderer>().enabled = true;
             fleetManagerObject.GetComponent<fleetManagerScript>().AddShipToSelection(this.gameObject);
 
