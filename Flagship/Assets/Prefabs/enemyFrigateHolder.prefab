@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7325853941349642040}
   - component: {fileID: 7325853941349642039}
+  - component: {fileID: 7325853941349642041}
   - component: {fileID: 7325853941349642038}
   - component: {fileID: 7325853941349642037}
   - component: {fileID: 7325853941349642036}
-  - component: {fileID: 7325853941349642041}
   - component: {fileID: 7325853941349642042}
   m_Layer: 0
   m_Name: enemyFrigate
@@ -49,6 +49,32 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7325853941349642035}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &7325853941349642041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7325853941349642035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e692aa17cf226146a2420cb18a44648, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetShip: {fileID: 0}
+  selectionRing: {fileID: 7009443622050881663}
+  shipsTargetingThisShip: 0
+  shipNavMeshAgent: {fileID: 0}
+  shipWeapons:
+  - {fileID: 441050806515945121}
+  torpedoPrefab: {fileID: 3292272065130710702, guid: 514f0fe27d59cc245a8ce3ccb6e943c5, type: 3}
+  torpedoLaunchers:
+  - {fileID: 7325853940253292892}
+  - {fileID: 5927959714043717823}
+  torpedoRange: 20
+  weaponFireRate: 5
+  shipDefensiveFire: 0
+  podCommander: {fileID: 0}
 --- !u!23 &7325853941349642038
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -126,31 +152,6 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &7325853941349642041
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7325853941349642035}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e692aa17cf226146a2420cb18a44648, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetShip: {fileID: 0}
-  selectionRing: {fileID: 7009443622050881663}
-  shipsTargetingThisShip: 0
-  shipNavMeshAgent: {fileID: 0}
-  shipWeapons:
-  - {fileID: 441050806515945121}
-  torpedoPrefab: {fileID: 3292272065130710702, guid: 514f0fe27d59cc245a8ce3ccb6e943c5, type: 3}
-  torpedoLaunchers:
-  - {fileID: 7325853940253292892}
-  - {fileID: 5927959714043717823}
-  torpedoRange: 20
-  weaponFireRate: 5
-  shipDefensiveFire: 0
 --- !u!114 &7325853941349642042
 MonoBehaviour:
   m_ObjectHideFlags: 0

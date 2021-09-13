@@ -89,19 +89,19 @@ public class fleetManagerScript : MonoBehaviour
 
         GameObject[] fleetShipsNew = GameObject.FindGameObjectsWithTag(playerShipTag);
 
-        print("FLEETSHIPS");
+        //print("FLEETSHIPS");
         foreach(var ship in fleetShips)
         {
-            print(ship);
+            //print(ship);
         }
 
-        print("FLEETSHIPSNEW");
+        //print("FLEETSHIPSNEW");
         foreach (var ship in fleetShipsNew)
         {
-            print(ship);
+            //print(ship);
         }
 
-        print(fleetShips.SequenceEqual(fleetShipsNew));
+        //print(fleetShips.SequenceEqual(fleetShipsNew));
 
         
         if(!fleetShips.SequenceEqual(fleetShipsNew))

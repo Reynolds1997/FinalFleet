@@ -23,7 +23,9 @@ public class enemyBehaviorScript : MonoBehaviour
     public float weaponFireRate = 0.5f;
     private float lastFired;
 
-    public bool shipDefensiveFire = false; 
+    public bool shipDefensiveFire = false;
+
+    public GameObject podCommander;
 
     // Start is called before the first frame update
     void Start()
@@ -100,6 +102,10 @@ public class enemyBehaviorScript : MonoBehaviour
     void requestTarget()
     {
         targetShip = null;
+        setTarget(targetShip);
+
+        print("This gameobject:" + this.gameObject);
+        podCommander.GetComponent<EnemyPodScript>().findNewTargetForUnit(gameObject);
         setTarget(targetShip);
         //Ping the fleet commander and request a new target. 
         //The fleet commander can change the active target at any time.
