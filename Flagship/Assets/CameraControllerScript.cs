@@ -10,6 +10,9 @@ public class CameraControllerScript : MonoBehaviour
     public float scrollSpeed = 20f;
 
     public Vector2 panLimit;
+    public Vector2 zoomLimit;
+
+
     // Update is called once per frame
     void Update()
     {
@@ -38,6 +41,8 @@ public class CameraControllerScript : MonoBehaviour
         pos.z = Mathf.Clamp(pos.z, -panLimit.y, panLimit.y);
 
         pos.y -= scroll * scrollSpeed * 50f * Time.deltaTime;
+
+        pos.y = Mathf.Clamp(pos.y, zoomLimit.x, zoomLimit.y);
         transform.position = pos;
     }
 }
