@@ -46,12 +46,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetShip: {fileID: 0}
   enemyTag: enemyShip
+  beamStartWidth: 0.2
+  beamEndWidth: 0.1
   beamStartColor: {r: 0, g: 0.6788602, b: 1, a: 0.7254902}
   beamEndColor: {r: 0, g: 1, b: 0.9086795, a: 0.8666667}
   weaponRange: 12
   defensiveFire: 0
   weaponArmed: 1
-  weaponFireRate: 1
+  weaponFireRate: 1.5
   beamDuration: 0.75
   isPulse: 1
   weaponDamage: 4
@@ -68,6 +70,7 @@ LineRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 0
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0

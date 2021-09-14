@@ -8,6 +8,7 @@ TagManager:
   - enemyShip
   - enemyTorpedo
   - terrainObject
+  - viewRadius
   layers:
   - Default
   - TransparentFX

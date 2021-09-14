@@ -5190,7 +5190,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 0
+  m_VersionIndex: 3
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -5375,14 +5375,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerShipTag: playerShip
   enemyShipTag: enemyShip
-  moveSpeed: 8
+  viewRadiusTag: viewRadius
+  moveSpeed: 12
   safetyTime: 0.25
   rotateSpeed: 200
   targetShip: {fileID: 0}
   torpedoDamage: 6
   torpedoModel: {fileID: 3198280862006388595}
   explosionEffect: {fileID: 6913246146122135794, guid: 25a3509173990a741aa1068b0a185626, type: 3}
-  detonationRange: 1
+  detonationRange: 0.1
+  accelRate: 0.25
 --- !u!54 &3292272065130710704
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5499,7 +5501,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 42d07b695f003a24b888b9f890bdbd8b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5520,7 +5522,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.25
+  m_Time: 0.5
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -5529,20 +5531,29 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.08571429
+        value: 0.048192978
         inSlope: 0
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.86355716
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.5372549, g: 0.5372549, b: 0.5372549, a: 1}
-      key1: {r: 0.7924528, g: 0.7924528, b: 0.7924528, a: 0.8784314}
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -5565,7 +5576,7 @@ TrailRenderer:
       atime5: 0
       atime6: 0
       atime7: 0
-      m_Mode: 1
+      m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0

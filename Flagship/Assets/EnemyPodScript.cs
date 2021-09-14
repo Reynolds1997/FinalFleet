@@ -25,7 +25,7 @@ public class EnemyPodScript : MonoBehaviour
         }
         foreach (GameObject unit in podUnitList)
         {
-            print(unit);
+            //print(unit);
         }
     }
 
@@ -61,7 +61,7 @@ public class EnemyPodScript : MonoBehaviour
         //Find a target that doesn't currently have 
         foreach(EnemyTarget target in targetList)
         {
-            print(target);
+            //print(target);
         }
         foreach(EnemyTarget target in targetList) //ISSUE HERE
         {

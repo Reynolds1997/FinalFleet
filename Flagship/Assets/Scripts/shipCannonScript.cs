@@ -9,7 +9,8 @@ public class shipCannonScript : MonoBehaviour
 
     public string enemyTag = "enemyShip";
 
-    private float beamWidth = 0.2f;
+    public float beamStartWidth = 0.2f;
+    public float beamEndWidth = 0.1f;
     public Color beamStartColor = Color.cyan;
     public Color beamEndColor = Color.white;
 
@@ -134,8 +135,8 @@ public class shipCannonScript : MonoBehaviour
         lineRenderer.enabled = true;
         lineRenderer.startColor = startColor;
         lineRenderer.endColor = endColor;
-        lineRenderer.startWidth = beamWidth;
-        lineRenderer.endWidth = beamWidth;
+        lineRenderer.startWidth = beamStartWidth;
+        lineRenderer.endWidth = beamEndWidth;
         lineRenderer.positionCount = 2;
         lineRenderer.useWorldSpace = true;
         lineRenderer.SetPosition(0, start); //x,y and z position of the starting point of the line
