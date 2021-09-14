@@ -167,7 +167,7 @@ MonoBehaviour:
   shipName: 
   isFlagship: 0
   maxHull: 10
-  maxShields: 5
+  maxShields: 10
   maxTorpedoes: 10
   maxFuel: 10
   maxCrew: 10
