@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5897700780220170322, guid: c34848c995b7eed44827e640661ffd3e, type: 3}
       propertyPath: m_Name
-      value: laserCannonStandard (1)
+      value: laserCannonLightVariant
       objectReference: {fileID: 0}
     - target: {fileID: 5897700780220170323, guid: c34848c995b7eed44827e640661ffd3e, type: 3}
       propertyPath: m_RootOrder
@@ -57,15 +57,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5897700780220170333, guid: c34848c995b7eed44827e640661ffd3e, type: 3}
       propertyPath: beamDuration
-      value: 0.5
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 5897700780220170333, guid: c34848c995b7eed44827e640661ffd3e, type: 3}
       propertyPath: weaponDamage
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5897700780220170333, guid: c34848c995b7eed44827e640661ffd3e, type: 3}
       propertyPath: weaponFireRate
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c34848c995b7eed44827e640661ffd3e, type: 3}
