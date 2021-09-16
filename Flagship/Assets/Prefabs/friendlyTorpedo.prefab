@@ -5215,7 +5215,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3370cdc1149a7944699f51695d838a9b, type: 2}
+  - {fileID: 2100000, guid: bcf845c2fd101264ba1688deb8465205, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5275,8 +5275,8 @@ GameObject:
   - component: {fileID: 3292272065130710704}
   - component: {fileID: 3292272065130710705}
   m_Layer: 0
-  m_Name: enemyTorpedo
-  m_TagString: enemyShip
+  m_Name: friendlyTorpedo
+  m_TagString: playerShip
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5378,9 +5378,9 @@ MonoBehaviour:
   viewRadiusTag: viewRadius
   moveSpeed: 12
   safetyTime: 0.25
-  rotateSpeed: 50
+  rotateSpeed: 360
   targetShip: {fileID: 0}
-  torpedoDamage: 4
+  torpedoDamage: 6
   torpedoModel: {fileID: 3198280862006388595}
   explosionEffect: {fileID: 6913246146122135794, guid: 25a3509173990a741aa1068b0a185626, type: 3}
   detonationRange: 0.1
@@ -5552,7 +5552,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.6320754, g: 0.34227479, b: 0.34227479, a: 1}
+      key0: {r: 0.49426842, g: 0.9811321, b: 0.93721884, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}

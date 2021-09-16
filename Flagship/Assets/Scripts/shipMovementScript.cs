@@ -33,6 +33,7 @@ public class shipMovementScript : MonoBehaviour
     public GameObject recentTarget = null;
 
     public GameObject[] shipWeapons;
+    public GameObject[] torpedoLaunchers;
 
     private GameObject fleetManagerObject;
 
@@ -66,11 +67,15 @@ public class shipMovementScript : MonoBehaviour
             {
                 if (myRaycastHit.transform != null)
                 {
+
+                    
                     GameObject hitObject = myRaycastHit.transform.gameObject;
+
+                    print("HIT OBJECT: " + hitObject);
                     //If object clicked on is an enemy ship or a friendly ship
                     if (hitObject.CompareTag(enemyShipTag) || hitObject.CompareTag(playerShipTag))
                     {
-
+                        
                         targetShip = hitObject;
 
 
@@ -210,6 +215,16 @@ public class shipMovementScript : MonoBehaviour
             {
                 weapon.GetComponent<shipCannonScript>().targetShip = target;
             }
+
+            
+        }
+
+        if(torpedoLaunchers != null)
+        {
+            foreach (GameObject launcher in torpedoLaunchers)
+            {
+                launcher.GetComponent<torpedoLauncherScript>().targetShip = target;
+            }
         }
         
     }
@@ -257,6 +272,11 @@ public class shipMovementScript : MonoBehaviour
             weapon.GetComponent<shipCannonScript>().defensiveFire = defensiveFire;
         }
 
+        foreach(GameObject torpedoLauncher in torpedoLaunchers)
+        {
+            torpedoLauncher.GetComponent<torpedoLauncherScript>().defensiveFire = defensiveFire;
+        }
+
         //If it isn't defensive fire, but we have a target selected, return to focusing fire on that target.
         if (!defensiveFire && targetShip != null)
         {
@@ -264,6 +284,8 @@ public class shipMovementScript : MonoBehaviour
             {
                 weapon.GetComponent<shipCannonScript>().targetShip = targetShip;
             }
+
+            
         }
         print("Defensive fire: " + defensiveFire);
     }

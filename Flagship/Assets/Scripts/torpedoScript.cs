@@ -9,7 +9,11 @@ public class torpedoScript : MonoBehaviour
     public string playerShipTag = "playerShip";
     public string enemyShipTag = "enemyShip";
     public string viewRadiusTag = "viewRadius";
+    public string terrainTag = "terrainTag"; //TODO: add the ability for torpedoes to detonate on terrain, letting the player try and position cover between them and enemy ships.
+    public bool isEnemyTorpedo = false;
     public float moveSpeed = 5f;
+
+    public string hostileTag;
     //This determines how long it takes after the torpedo has left the tube for it to become live. Useful for preventing accidental detonations on launching.
     public float safetyTime = 1f;
 
@@ -43,6 +47,14 @@ public class torpedoScript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         launchTime = Time.time;
+        if (isEnemyTorpedo)
+        {
+            hostileTag = playerShipTag;
+        }
+        else
+        {
+            hostileTag = enemyShipTag;
+        }
 
     }
 
@@ -110,9 +122,9 @@ public class torpedoScript : MonoBehaviour
         Quaternion rotation = Quaternion.FromToRotation(Vector3.up, contact.normal);
         Vector3 position = contact.point;
         
-        if(collision.gameObject.CompareTag(playerShipTag) || collision.gameObject.CompareTag(enemyShipTag) || collision.gameObject.CompareTag(viewRadiusTag))
+        if(collision.gameObject.CompareTag(hostileTag) || collision.gameObject.CompareTag(viewRadiusTag))
         {
-            if ((collision.gameObject.GetComponent<shipStatsManagerScript>() != null &&collision.gameObject.GetComponent<shipStatsManagerScript>().isTorpedo) || collision.gameObject.CompareTag(viewRadiusTag))
+            if ( collision.gameObject.CompareTag(viewRadiusTag)) //(collision.gameObject.GetComponent<shipStatsManagerScript>() != null &&collision.gameObject.GetComponent<shipStatsManagerScript>().isTorpedo) ||
             {
                 doNotDetonate = true;
             }
