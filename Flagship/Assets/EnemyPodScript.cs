@@ -1,25 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class EnemyPodScript : MonoBehaviour
 {
 
-    public List<GameObject> targetObjectsList;
+    public List<GameObject> detectedShipsList;
     public List<EnemyTarget> targetList = new List<EnemyTarget>();
     public List<GameObject> patrolPointList;
     public List<GameObject> podUnitList;
+
+    public float alertLevel = 0;
+   // public List<GameObject> alertedUnits;
+    public float yellowAlertThreshold = 1;
+    public float redAlertThreshold = 5;
 
     public Dictionary<GameObject, int> targetDictionary = new Dictionary<GameObject, int>();
 
     public int shipsPerTarget = 2;
 
-    public int alertLevel = 0;
+    
+   // public int detectedShipsCount = 0;
+    public int enemyTargetCount = 0;
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        foreach(GameObject target in targetObjectsList)
+        foreach(GameObject target in detectedShipsList)
         {
             addTargetToList(target);
         }
@@ -32,7 +41,75 @@ public class EnemyPodScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
+
+
+        //detectedShipsCount = detectedShipsList.Count();
+        enemyTargetCount = targetList.Count();
         
+        if (enemyTargetCount > 0)
+        {
+            alertLevel += Time.deltaTime;
+
+        }
+        else
+        {
+            alertLevel -= Time.deltaTime;
+        }
+
+        alertLevel = Mathf.Clamp(alertLevel, 0, redAlertThreshold);
+
+        
+        if (targetList.Count <= 0 && alertLevel > 0)
+        {
+            standDown();
+        }
+
+        if (alertLevel >= redAlertThreshold)
+        {
+            targetList = targetList.Where(item => item.targetObject != null).ToList();
+
+
+            /*foreach (GameObject targetShip in detectedShipsList) //ship.GetComponentInChildren<EnemyVisionRadiusScript>().targetShipsList)
+            {
+                
+                if(targetShip != null)
+                {
+                    targetList.Add(new EnemyTarget
+                    {
+                        targetObject = targetShip,
+                        assignedUnits = new List<GameObject>()
+                    });
+                }
+                
+            }
+            */
+        }
+
+
+        //Remove null items from the lists
+        targetList = targetList.Where(item => item != null).ToList();
+        
+
+
+
+
+
+
+        /*
+        float newAlertLevel = 0;
+        foreach (GameObject unit in alertedUnits) //|| podManager.GetComponent<EnemyPodScript>().alertedUnits.Count > 0
+        {
+            if (unit.GetComponentInChildren<EnemyVisionRadiusScript>().currentAlertLevel > newAlertLevel)
+            {
+                newAlertLevel = unit.GetComponentInChildren<EnemyVisionRadiusScript>().currentAlertLevel;
+            }
+            //print(newAlertLevel);
+        }
+        alertLevel = newAlertLevel;
+        */
+
     }
 
 
@@ -77,21 +154,48 @@ public class EnemyPodScript : MonoBehaviour
 
     }
 
-    void addTargetToList(GameObject newTarget)
+    public void addTargetToList(GameObject newTarget)
     {
         //Not set to instance of object?
-        targetList.Add(new EnemyTarget
+        EnemyTarget existingTarget = targetList.Find(x => x.targetObject == newTarget);
+        if (existingTarget !=null)
         {
-            targetObject = newTarget,
-            assignedUnits = new List<GameObject>()
-        });
+            existingTarget.watchingUnitsCount++;
+        }
+        else
+        {
+            targetList.Add(new EnemyTarget
+            {
+                targetObject = newTarget,
+                assignedUnits = new List<GameObject>(),
+                watchingUnitsCount = 1
+            });
+        }
+        
+        //targetList = targetList.Where(item => item != null).ToList();
     }
 
-    void removeTargetFromList(GameObject removeTarget)
+    public void removeTargetFromList(GameObject removeTarget)
     {
         //TODO
         //FIX THIS LATER
         //targetList.Remove(removeTarget);
+
+        foreach(EnemyTarget target in targetList.ToArray())
+        {
+            if(target.targetObject == removeTarget)
+            {
+                target.watchingUnitsCount--;
+                print(target.targetObject + " BEING WATCHED BY " + target.watchingUnitsCount);
+                if(target.watchingUnitsCount <= 0)
+                {
+                    targetList.Remove(target);
+                }
+
+            }
+        }
+
+
     }
 
     void addUnitToList(GameObject newUnit)
@@ -114,5 +218,32 @@ public class EnemyPodScript : MonoBehaviour
     void returnToPatrol()
     {
 
+    }
+
+    public void redAlert()
+    {
+        
+
+        print(targetList);
+    }
+
+    public void standDown()
+    {
+        alertLevel = 0;
+        //alertedUnits.Clear();
+        targetList.Clear();
+
+        foreach(GameObject ship in podUnitList.ToArray())
+        {
+            if(ship!= null)
+            {
+                //ship.GetComponentInChildren<EnemyVisionRadiusScript>().currentAlertLevel = 0;
+                ship.GetComponent<enemyBehaviorScript>().standDown();
+            }
+            else
+            {
+                podUnitList.Remove(ship);
+            }
+        }
     }
 }

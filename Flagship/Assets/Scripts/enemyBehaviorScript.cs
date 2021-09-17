@@ -62,10 +62,16 @@ public class enemyBehaviorScript : MonoBehaviour
 
             pursueTarget(targetShip);
         }
-        else
+        else if (this.gameObject.GetComponentInChildren<EnemyVisionRadiusScript>().currentAlertLevel >= podCommander.GetComponent<EnemyPodScript>().redAlertThreshold)
         {
             requestTarget();
         }
+        else
+        {
+            setTarget(null);
+            pursueTarget(null);
+        }
+       
 
         
 
@@ -81,13 +87,31 @@ public class enemyBehaviorScript : MonoBehaviour
         {
             shipNavMeshAgent.SetDestination(target.transform.position);
         }
-
-        
+        else
+        {
+            //shipNavMeshAgent.velocity = new Vector3(0,0,0);
+        }
     }
 
     //Sets the target for the ship's weapons systems
-    void setTarget(GameObject target)
+    public void setTarget(GameObject target)
     {
+        foreach (GameObject turret in shipWeapons)
+        {
+            turret.GetComponent<shipCannonScript>().targetShip = target;
+        }
+
+        foreach (GameObject launcher in torpedoLaunchers)
+        {
+            launcher.GetComponent<torpedoLauncherScript>().targetShip = target;
+        }
+    }
+
+    public void standDown()
+    {
+        //print("STANDING DOWN");
+        targetShip = null;
+        GameObject target = null;
         foreach (GameObject turret in shipWeapons)
         {
             turret.GetComponent<shipCannonScript>().targetShip = target;

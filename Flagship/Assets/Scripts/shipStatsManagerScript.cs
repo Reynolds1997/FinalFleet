@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
+using TMPro;
 
 public class shipStatsManagerScript : MonoBehaviour
 {
@@ -40,6 +41,7 @@ public class shipStatsManagerScript : MonoBehaviour
 
     public Image hullBar;
     public Image shieldBar;
+    public TMP_Text shipNameBar;
 
     [Header("FTL Jump Variables")]
     public float maxJumpTimer = 60;
@@ -86,6 +88,11 @@ public class shipStatsManagerScript : MonoBehaviour
        // hullImpactEffect = GameObject.Find("Assets/Prefabs/hullImpactEffect.prefab");
 
         jumpTimerCounter = Random.Range(minJumpTimer, maxJumpTimer);
+
+
+
+        
+        //shipNameBar.enabled = false;
     }
 
     // Update is called once per frame

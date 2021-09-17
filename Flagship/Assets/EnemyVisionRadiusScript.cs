@@ -11,12 +11,13 @@ public class EnemyVisionRadiusScript : MonoBehaviour
     public Material yellowAlertMaterial;
     public Material redAlertMaterial;
 
-    public float currentAlertLevel = 0;
-    public float yellowAlertThreshold = 1;
-    public float redAlertThreshold = 5;
+    
 
-    public List<GameObject> targetShipsList;
-    public GameObject pod;
+    //public List<GameObject> targetShipsList;
+    public GameObject podManager;
+    public GameObject connectedShip;
+
+    public float currentAlertLevel;
 
     // Start is called before the first frame update
     void Start()
@@ -27,46 +28,58 @@ public class EnemyVisionRadiusScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        targetShipsList = targetShipsList.Where(item => item != null).ToList();
+
+        
+        //targetShipsList = targetShipsList.Where(item => item != null).ToList();
         //TODO: This is horribly inefficient. Clean this up.
-        if (targetShipsList.Count > 0)
+
+        currentAlertLevel = podManager.GetComponent<EnemyPodScript>().alertLevel;
+
+        if (currentAlertLevel >= podManager.GetComponent<EnemyPodScript>().redAlertThreshold)
         {
-            currentAlertLevel += Time.deltaTime;
-            if(currentAlertLevel >= redAlertThreshold)
-            {
-                alertnessIndicator.GetComponent<MeshRenderer>().material = redAlertMaterial;
-            }
-            else if(currentAlertLevel >= yellowAlertThreshold)
-            {
-                alertnessIndicator.GetComponent<MeshRenderer>().material = yellowAlertMaterial;
-            }
+            alertnessIndicator.GetComponent<MeshRenderer>().material = redAlertMaterial;
+            //podManager.GetComponent<EnemyPodScript>().redAlert(currentAlertLevel);
+        }
+        else if (currentAlertLevel >= podManager.GetComponent<EnemyPodScript>().yellowAlertThreshold)
+        {
+            alertnessIndicator.GetComponent<MeshRenderer>().material = yellowAlertMaterial;
         }
         else
         {
             alertnessIndicator.GetComponent<MeshRenderer>().material = greenAlertMaterial;
-            currentAlertLevel -= Time.deltaTime;
-            
+           // podManager.GetComponent<EnemyPodScript>().alertedUnits.Remove(this.gameObject.transform.parent.gameObject);
         }
 
-        currentAlertLevel = Mathf.Clamp(currentAlertLevel, 0, 5);
+
+        //if(currentAlertLevel > podManager.GetComponent<EnemyPodScript>().alertLevel)
+        //{
+        //    podManager.GetComponent<EnemyPodScript>().alertLevel = currentAlertLevel;
+        // }
+
+
+
+
+
+        
     }
 
 
     private void OnTriggerEnter(Collider other)
     {
-        print(other.gameObject);
+        //print(other.gameObject);
         if (other.gameObject.CompareTag("playerShip"))
         {
-            targetShipsList.Add(other.gameObject);
+            //targetShipsList.Add(other.gameObject);
+            podManager.GetComponent<EnemyPodScript>().addTargetToList(other.gameObject);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        print(other.gameObject);
+        //print(other.gameObject);
         if (other.gameObject.CompareTag("playerShip"))
         {
-            targetShipsList.Remove(other.gameObject);
+            podManager.GetComponent<EnemyPodScript>().removeTargetFromList(other.gameObject);
         }
     }
 

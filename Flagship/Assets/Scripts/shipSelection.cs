@@ -29,7 +29,7 @@ public class shipSelection : MonoBehaviour
                 {
                     
                     GameObject hitObject = myRaycastHit.transform.gameObject;
-                    printName(hitObject);
+                    //printName(hitObject);
                     if (hitObject.CompareTag(playerShipTag))
                     {
                         if (Input.GetButton("Shift"))

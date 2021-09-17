@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using TMPro;
 
 public class shipMovementScript : MonoBehaviour
 {
@@ -36,7 +37,6 @@ public class shipMovementScript : MonoBehaviour
     public GameObject[] torpedoLaunchers;
 
     private GameObject fleetManagerObject;
-
   
     public bool defensiveFire = false;
     // Start is called before the first frame update
@@ -245,8 +245,8 @@ public class shipMovementScript : MonoBehaviour
     {
         if(this.gameObject.GetComponent<shipStatsManagerScript>().currentHull > 0) { 
             isSelected = true;
-
-
+            
+            
             //this.GetComponent<Outline>().enabled = true;
             
             selectionRing.GetComponent<MeshRenderer>().enabled = true;
@@ -257,6 +257,7 @@ public class shipMovementScript : MonoBehaviour
     public void deselectShip()
     {
         isSelected = false;
+        
         //this.GetComponent<Outline>().enabled = false;
         selectionRing.GetComponent<MeshRenderer>().enabled = false;
         fleetManagerObject.GetComponent<fleetManagerScript>().RemoveShipFromSelection(this.gameObject);

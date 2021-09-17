@@ -23,7 +23,7 @@ public class torpedoLauncherScript : MonoBehaviour
         lastFired = Time.time;
         parentShip = this.transform.parent.gameObject;
 
-        InvokeRepeating("updateTarget", 0f, 0.25f);
+    // InvokeRepeating("updateTarget", 0f, 0.25f);
     }
 
     // Update is called once per frame

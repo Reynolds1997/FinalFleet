@@ -3783,7 +3783,7 @@ Transform:
   m_GameObject: {fileID: 2794627033629560784}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 7325853941349642040}
   m_RootOrder: 1
@@ -5583,7 +5583,7 @@ MonoBehaviour:
   redAlertMaterial: {fileID: 2100000, guid: 1a48a200ad834d44a9b855c37e360634, type: 2}
   currentAlertLevel: 0
   yellowAlertThreshold: 1
-  redAlertThreshold: 5
+  redAlertThreshold: 3
   targetShipsList: []
   pod: {fileID: 0}
 --- !u!135 &5751542652117676614
