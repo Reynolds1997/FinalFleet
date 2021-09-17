@@ -56,6 +56,10 @@ PrefabInstance:
       value: hullImpactEffect
       objectReference: {fileID: 0}
     - target: {fileID: 3149053634095452651, guid: b095dcb020c212d45b1f940c75231eef, type: 3}
+      propertyPath: stopAction
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3149053634095452651, guid: b095dcb020c212d45b1f940c75231eef, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
       value: 0
       objectReference: {fileID: 0}

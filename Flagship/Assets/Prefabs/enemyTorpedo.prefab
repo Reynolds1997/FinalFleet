@@ -5376,7 +5376,10 @@ MonoBehaviour:
   playerShipTag: playerShip
   enemyShipTag: enemyShip
   viewRadiusTag: viewRadius
+  terrainTag: terrainTag
+  isEnemyTorpedo: 0
   moveSpeed: 12
+  hostileTag: 
   safetyTime: 0.25
   rotateSpeed: 50
   targetShip: {fileID: 0}
@@ -5440,7 +5443,7 @@ MonoBehaviour:
   maxJumpTimer: 60
   minJumpTimer: 30
   jumpTimerCounter: 0
-  isJumpingWhenReady: 1
+  isJumpingWhenReady: 0
   jumpedOut: 0
   fleetManagerObject: {fileID: 0}
   explosionEffect: {fileID: 0}
