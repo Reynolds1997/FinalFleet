@@ -71,7 +71,7 @@ public class shipMovementScript : MonoBehaviour
                     
                     GameObject hitObject = myRaycastHit.transform.gameObject;
 
-                    print("HIT OBJECT: " + hitObject);
+                    //print("HIT OBJECT: " + hitObject);
                     //If object clicked on is an enemy ship or a friendly ship
                     if (hitObject.CompareTag(enemyShipTag) || hitObject.CompareTag(playerShipTag))
                     {

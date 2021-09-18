@@ -186,7 +186,7 @@ public class EnemyPodScript : MonoBehaviour
             if(target.targetObject == removeTarget)
             {
                 target.watchingUnitsCount--;
-                print(target.targetObject + " BEING WATCHED BY " + target.watchingUnitsCount);
+                //print(target.targetObject + " BEING WATCHED BY " + target.watchingUnitsCount);
                 if(target.watchingUnitsCount <= 0)
                 {
                     targetList.Remove(target);

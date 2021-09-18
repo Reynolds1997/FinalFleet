@@ -73,7 +73,7 @@ public class shipCannonScript : MonoBehaviour
             {
                 if (beamFiring && targetShip != null)
                 {
-                    
+
 
                     drawBeam(this.transform.position, targetShip.transform.position, beamStartColor, beamEndColor);
 
@@ -117,8 +117,22 @@ public class shipCannonScript : MonoBehaviour
 
         if (Time.time > weaponFireRate + lastFired)
         {
-            lastFired = Time.time;
-            target.GetComponent<shipStatsManagerScript>().takeDamage(weaponDamage);
+            RaycastHit hit;
+            Physics.Raycast(this.gameObject.transform.position, target.transform.position, out hit);
+
+            if (true)//(hit.transform.gameObject == target)
+            {
+                lastFired = Time.time;
+                target.GetComponent<shipStatsManagerScript>().takeDamage(weaponDamage);
+
+                // enemy can see the player!
+            }
+            else
+            {
+                print(hit);
+            }
+            
+
         }
 
         

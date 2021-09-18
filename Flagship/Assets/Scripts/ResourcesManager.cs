@@ -99,7 +99,7 @@ public class ResourcesManager : MonoBehaviour
 
         if(resourceType == "hull")
         {
-            print("Modifying hull");
+            //print("Modifying hull");
 
             //TODO: Fix weirdness with negatives. Get things to clamp to maxes and mins properly.
             hullPool -= amount;
@@ -159,6 +159,16 @@ public class ResourcesManager : MonoBehaviour
 
         shipHullText.GetComponent<TMPro.TMP_Text>().SetText(selectedShipCurrentHull.ToString() + "/" + selectedShipMaxHull.ToString());
         fleetHullText.GetComponent<TMPro.TMP_Text>().SetText(hullPool.ToString());
+    }
+
+    public void addToPool(string poolName, int amount)
+    {
+        if(poolName == "hull")
+        {
+            hullPool += amount;
+        }
+
+        updateUIText();
     }
 
 }

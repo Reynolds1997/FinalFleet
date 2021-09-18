@@ -152,7 +152,7 @@ public class torpedoScript : MonoBehaviour
         torpedoModel.GetComponent<MeshRenderer>().enabled = false;
         Instantiate(explosionEffect, transform.position, transform.rotation);
         
-        print("IMPACT TARGET: " + impactTarget);
+        //print("IMPACT TARGET: " + impactTarget);
         if (impactTarget != null)
         {
             if(impactTarget.GetComponent<shipStatsManagerScript>() != null)
