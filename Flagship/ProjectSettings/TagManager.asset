@@ -9,6 +9,7 @@ TagManager:
   - enemyTorpedo
   - terrainObject
   - viewRadius
+  - resourceNode
   layers:
   - Default
   - TransparentFX
