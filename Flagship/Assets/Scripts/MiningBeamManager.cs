@@ -17,10 +17,23 @@ public class MiningBeamManager : MonoBehaviour
 
     public GameObject fleetManager;
 
+    LineRenderer lineRenderer;
+    public float beamStartWidth = 1;
+    public float beamEndWidth = 1;
+    public Color beamStartColor;
+    public Color beamEndColor;
+    public bool isMining = false;
+    public GameObject miningTarget;
+    public List<GameObject> miningTargets;
+
+    
+
     // Start is called before the first frame update
     void Start()
     {
-        lastMined = Time.time;   
+        lastMined = Time.time;
+        lineRenderer = this.GetComponent<LineRenderer>();
+        lineRenderer.enabled = false;
     }
 
     // Update is called once per frame
@@ -32,25 +45,79 @@ public class MiningBeamManager : MonoBehaviour
             fleetManager.GetComponent<ResourcesManager>().addToPool(resourceType,resourcesGathered);
             resourcesGathered = 0;
         }
+        if (miningTargets.Count > 0)
+        {
+            // print("RESOURCE MATCH");
+            if (Time.time > lastMined + mineRate)
+            {
+                //   print("MINING");
+                lastMined = Time.time;
+                resourcesGathered += miningTargets[0].GetComponent<ResourcesNodeScript>().depleteResources(mineAmount);
+                isMining = true;
+
+            }
+            if (miningTargets[0] != null)
+            {
+                drawBeam(this.transform.position, miningTargets[0].transform.position, beamStartColor, beamEndColor);
+            }
+            else
+            {
+                miningTargets.Remove(miningTargets[0]);
+            }
+            
+        }
+        else
+        {
+            lineRenderer.enabled = false;
+        }
+
+        
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(resourcesTag))
         {
             //print("RESOURCES IN RANGE");
             if (resourceType == (other.GetComponent<ResourcesNodeScript>().resourceType))
             {
-               // print("RESOURCE MATCH");
-                if (Time.time > lastMined + mineRate)
-                {
-                 //   print("MINING");
-                    lastMined = Time.time;
-                    resourcesGathered += other.GetComponent<ResourcesNodeScript>().depleteResources(mineAmount);
+                
+                if (!miningTargets.Contains(other.gameObject)){
+                    miningTargets.Add(other.gameObject);
+
                 }
+                
             }
-            
-            
         }
+
+
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag(resourcesTag))
+        {
+            //print("RESOURCES IN RANGE");
+            if (resourceType == (other.GetComponent<ResourcesNodeScript>().resourceType))
+            {
+                miningTargets.Remove(other.gameObject);
+            }
+        }
+
+
+    }
+
+
+    void drawBeam(Vector3 start, Vector3 end, Color startColor, Color endColor)
+    {
+        lineRenderer.enabled = true;
+        lineRenderer.startColor = startColor;
+        lineRenderer.endColor = endColor;
+        lineRenderer.startWidth = beamStartWidth;
+        lineRenderer.endWidth = beamEndWidth;
+        lineRenderer.positionCount = 2;
+        lineRenderer.useWorldSpace = true;
+        lineRenderer.SetPosition(0, start); //x,y and z position of the starting point of the line
+        lineRenderer.SetPosition(1, end);
+
     }
 }
