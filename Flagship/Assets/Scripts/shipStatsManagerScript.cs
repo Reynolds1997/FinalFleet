@@ -49,6 +49,7 @@ public class shipStatsManagerScript : MonoBehaviour
     public float jumpTimerCounter;
     public bool isJumpingWhenReady = true;
     public bool jumpedOut = false;
+    public bool isLongJumping = false;
 
     public GameObject fleetManagerObject;
 
@@ -146,15 +147,25 @@ public class shipStatsManagerScript : MonoBehaviour
         this.gameObject.GetComponent<shipMovementScript>().SetTarget(null);
         this.gameObject.GetComponent<shipMovementScript>().SetWeaponArmStatus(false);
 
-        fleetManagerObject.GetComponent<fleetManagerScript>().jumpedShips.Add(this.gameObject);
 
         jumpPosition = this.gameObject.transform.parent.transform.position;
 
-        fleetManagerObject.GetComponent<fleetManagerScript>().jumpedShipsCounter++;
+
+        if (isLongJumping)
+        {
+            fleetManagerObject.GetComponent<fleetManagerScript>().jumpedShips.Add(this.gameObject);
+            fleetManagerObject.GetComponent<fleetManagerScript>().jumpedShipsCounter++;
+        }
+        else
+        {
+            jumpIn();
+        }
 
 
 
-       // print(this.name + " Jump Position " + jumpPosition);
+
+
+        // print(this.name + " Jump Position " + jumpPosition);
     }
 
     public void jumpIn()
