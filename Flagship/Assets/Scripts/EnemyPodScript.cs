@@ -19,7 +19,6 @@ public class EnemyPodScript : MonoBehaviour
     public Dictionary<GameObject, int> targetDictionary = new Dictionary<GameObject, int>();
 
     public int shipsPerTarget = 2;
-
     
    // public int detectedShipsCount = 0;
     public int enemyTargetCount = 0;
@@ -36,6 +35,7 @@ public class EnemyPodScript : MonoBehaviour
         {
             //print(unit);
         }
+        standDown();
     }
 
     // Update is called once per frame
@@ -69,7 +69,7 @@ public class EnemyPodScript : MonoBehaviour
         if (alertLevel >= redAlertThreshold)
         {
             targetList = targetList.Where(item => item.targetObject != null).ToList();
-
+            goToRedAlert();
 
             /*foreach (GameObject targetShip in detectedShipsList) //ship.GetComponentInChildren<EnemyVisionRadiusScript>().targetShipsList)
             {
@@ -112,7 +112,15 @@ public class EnemyPodScript : MonoBehaviour
 
     }
 
+    void goToRedAlert()
+    {
+        foreach (GameObject ship in podUnitList.ToArray())
+        {
+            ship.GetComponent<shipStatsManagerScript>().hullBar.transform.parent.gameObject.SetActive(true);
 
+
+        }
+    }
 
     //Assign shipsPerTarget ships to each target in the list, until you're out of ships. 
     void assignTargets()
@@ -244,6 +252,10 @@ public class EnemyPodScript : MonoBehaviour
             {
                 podUnitList.Remove(ship);
             }
+
+
+            ship.GetComponent<shipStatsManagerScript>().hullBar.transform.parent.gameObject.SetActive(false);
+            
         }
     }
 }

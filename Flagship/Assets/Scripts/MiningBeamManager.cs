@@ -26,6 +26,10 @@ public class MiningBeamManager : MonoBehaviour
     public GameObject miningTarget;
     public List<GameObject> miningTargets;
 
+    public bool isPulse = true;
+    public float beamDuration = 2.5f;
+    
+
     
 
     // Start is called before the first frame update
@@ -64,7 +68,13 @@ public class MiningBeamManager : MonoBehaviour
             {
                 miningTargets.Remove(miningTargets[0]);
             }
-            
+
+            if (isPulse && Time.time > beamDuration + lastMined)
+            {
+                
+                lineRenderer.enabled = false;
+            }
+
         }
         else
         {
