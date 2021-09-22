@@ -8,7 +8,6 @@ public class EnemyPodScript : MonoBehaviour
 
     public List<GameObject> detectedShipsList;
     public List<EnemyTarget> targetList = new List<EnemyTarget>();
-    public List<GameObject> patrolPointList;
     public List<GameObject> podUnitList;
 
     public float alertLevel = 0;
@@ -41,9 +40,7 @@ public class EnemyPodScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
-
+        
 
         //detectedShipsCount = detectedShipsList.Count();
         enemyTargetCount = targetList.Count();
@@ -86,17 +83,10 @@ public class EnemyPodScript : MonoBehaviour
             }
             */
         }
-
-
+        
         //Remove null items from the lists
         targetList = targetList.Where(item => item != null).ToList();
         
-
-
-
-
-
-
         /*
         float newAlertLevel = 0;
         foreach (GameObject unit in alertedUnits) //|| podManager.GetComponent<EnemyPodScript>().alertedUnits.Count > 0
@@ -116,7 +106,15 @@ public class EnemyPodScript : MonoBehaviour
     {
         foreach (GameObject ship in podUnitList.ToArray())
         {
-            ship.GetComponent<shipStatsManagerScript>().hullBar.transform.parent.gameObject.SetActive(true);
+            if(ship != null)
+            {
+                
+                ship.GetComponent<shipStatsManagerScript>().hullBar.transform.parent.gameObject.SetActive(true);
+            }
+            else
+            {
+                podUnitList.Remove(ship);
+            }
 
 
         }

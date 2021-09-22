@@ -74,11 +74,11 @@ public class shipCannonScript : MonoBehaviour
                 if (beamFiring && targetShip != null)
                 {
 
-
+                    fireCannon(targetShip);
                     drawBeam(this.transform.position, targetShip.transform.position, beamStartColor, beamEndColor);
 
 
-                    fireCannon(targetShip);
+                    
 
 
                 }

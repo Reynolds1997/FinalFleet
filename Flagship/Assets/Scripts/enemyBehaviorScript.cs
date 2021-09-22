@@ -39,7 +39,6 @@ public class enemyBehaviorScript : MonoBehaviour
     void Update()
     {
 
-
         if (shipsTargetingThisShip > 0)
         {
 
@@ -86,6 +85,8 @@ public class enemyBehaviorScript : MonoBehaviour
         if(targetShip != null)
         {
             shipNavMeshAgent.SetDestination(target.transform.position);
+
+            //shipNavMeshAgent.destination = target.transform.position;
         }
         else
         {

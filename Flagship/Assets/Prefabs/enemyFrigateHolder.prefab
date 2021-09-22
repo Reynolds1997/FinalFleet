@@ -5581,11 +5581,9 @@ MonoBehaviour:
   greenAlertMaterial: {fileID: 2100000, guid: 435bf580598234b4699c340a389a30a3, type: 2}
   yellowAlertMaterial: {fileID: 2100000, guid: 8a1a72452bab7fb408f11c17bf029607, type: 2}
   redAlertMaterial: {fileID: 2100000, guid: 1a48a200ad834d44a9b855c37e360634, type: 2}
+  podManager: {fileID: 0}
+  connectedShip: {fileID: 0}
   currentAlertLevel: 0
-  yellowAlertThreshold: 1
-  redAlertThreshold: 3
-  targetShipsList: []
-  pod: {fileID: 0}
 --- !u!135 &5751542652117676614
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -8333,7 +8331,7 @@ MonoBehaviour:
   shipName: 
   isFlagship: 0
   maxHull: 8
-  maxShields: 4
+  maxShields: 6
   maxTorpedoes: 10
   maxFuel: 10
   maxCrew: 10
@@ -8354,11 +8352,13 @@ MonoBehaviour:
   lastRegen: 0
   hullBar: {fileID: 7312234108118805076}
   shieldBar: {fileID: 7312234107169530150}
+  shipNameBar: {fileID: 0}
   maxJumpTimer: 60
   minJumpTimer: 30
   jumpTimerCounter: 0
   isJumpingWhenReady: 0
   jumpedOut: 0
+  isLongJumping: 0
   fleetManagerObject: {fileID: 0}
   explosionEffect: {fileID: 75774937396107074, guid: e9b8ac4d431a5094b91b2e39853a5ec0, type: 3}
   preExplosionEffect: {fileID: 0}
