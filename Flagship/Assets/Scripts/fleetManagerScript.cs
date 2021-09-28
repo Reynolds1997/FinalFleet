@@ -180,4 +180,15 @@ public class fleetManagerScript : MonoBehaviour
         }
 
     }
+
+    public void JumpOnce()
+    {
+        if(selectedShips.Count > 0)
+        {
+            foreach(GameObject ship in selectedShips)
+            {
+                ship.GetComponent<shipStatsManagerScript>().jumpOut();
+            }
+        }
+    }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using TMPro;
+using UnityEngine.UI;
 
 public class shipMovementScript : MonoBehaviour
 {
@@ -37,8 +38,17 @@ public class shipMovementScript : MonoBehaviour
     public GameObject[] torpedoLaunchers;
 
     private GameObject fleetManagerObject;
-  
+
+
+    //Defensive fire stuff
+
+    //public GameObject indicatorObject;
     public bool defensiveFire = false;
+    public Image fireModeImage;
+    public Sprite defensiveFireOnIcon;
+    public Sprite focusFireOnIcon;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +57,9 @@ public class shipMovementScript : MonoBehaviour
 
         shipName = this.GetComponent<shipStatsManagerScript>().shipName;
         fleetManagerObject = GameObject.Find("FleetManager");
+
+        //fireModeImage = indicatorObject.transform.Find("FocusFireIndicator").gameObject.GetComponent<Image>();
+        ///defensiveFireOnIcon = 
     }
 
 
@@ -284,10 +297,25 @@ public class shipMovementScript : MonoBehaviour
             foreach (GameObject weapon in shipWeapons)
             {
                 weapon.GetComponent<shipCannonScript>().targetShip = targetShip;
+
             }
 
             
         }
+
+        if(fireModeImage != null)
+        {
+            if (defensiveFire)
+            {
+                fireModeImage.sprite = defensiveFireOnIcon;
+            }
+            else
+            {
+                fireModeImage.sprite = focusFireOnIcon;
+            }
+        }
+        
+
         print("Defensive fire: " + defensiveFire);
     }
 

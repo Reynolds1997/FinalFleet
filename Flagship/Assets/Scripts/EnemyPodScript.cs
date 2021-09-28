@@ -109,7 +109,7 @@ public class EnemyPodScript : MonoBehaviour
             if(ship != null)
             {
                 
-                ship.GetComponent<shipStatsManagerScript>().hullBar.transform.parent.gameObject.SetActive(true);
+                ship.GetComponent<shipStatsManagerScript>().hullBar.transform.parent.gameObject.transform.parent.gameObject.SetActive(true);
             }
             else
             {
@@ -252,7 +252,7 @@ public class EnemyPodScript : MonoBehaviour
             }
 
 
-            ship.GetComponent<shipStatsManagerScript>().hullBar.transform.parent.gameObject.SetActive(false);
+            ship.GetComponent<shipStatsManagerScript>().hullBar.transform.parent.gameObject.transform.parent.gameObject.SetActive(false); // \\.transform.parent.transform.parent.gameObject.SetActive(false);
             
         }
     }

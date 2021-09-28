@@ -50,6 +50,7 @@ public class shipStatsManagerScript : MonoBehaviour
     public bool isJumpingWhenReady = true;
     public bool jumpedOut = false;
     public bool isLongJumping = false;
+    public Image jumpIndicator;
 
     public GameObject fleetManagerObject;
 
@@ -86,11 +87,12 @@ public class shipStatsManagerScript : MonoBehaviour
         fleetManagerObject = GameObject.Find("FleetManager");
 
         //shieldImpactEffect = GameObject.Find("Assets/Prefabs/shieldImpactEffect.prefab");
-       // hullImpactEffect = GameObject.Find("Assets/Prefabs/hullImpactEffect.prefab");
+        // hullImpactEffect = GameObject.Find("Assets/Prefabs/hullImpactEffect.prefab");
 
-        jumpTimerCounter = Random.Range(minJumpTimer, maxJumpTimer);
+        //jumpTimerCounter = Random.Range(minJumpTimer, maxJumpTimer);
+        jumpTimerCounter = maxJumpTimer;
 
-
+        
 
         
         //shipNameBar.enabled = false;
@@ -124,7 +126,17 @@ public class shipStatsManagerScript : MonoBehaviour
             jumpOut();
         }
 
+        if (jumpIndicator != null)
+        {
+            updateJumpIndicator();
+        }
+
         
+    }
+
+    void updateJumpIndicator()
+    {
+        jumpIndicator.fillAmount = (float)jumpTimerCounter / (float)maxJumpTimer;
     }
 
     public void ChangeJumpSetting(bool newSetting)
@@ -137,29 +149,33 @@ public class shipStatsManagerScript : MonoBehaviour
 
     public void jumpOut()
     {
-        //Instantiate jump VFX that cover up the ship just disappearing
-        Instantiate(jumpFlare, this.transform.position + jumpFlareOffset,this.transform.rotation);
-        jumpedOut = true;
+        if(jumpTimerCounter <= 0)
+        {
+            // Instantiate jump VFX that cover up the ship just disappearing
+            Instantiate(jumpFlare, this.transform.position + jumpFlareOffset, this.transform.rotation);
+            jumpedOut = true;
 
-        this.gameObject.transform.parent.gameObject.transform.localScale = new Vector3(0, 0, 0);
+            this.gameObject.transform.parent.gameObject.transform.localScale = new Vector3(0, 0, 0);
 
+
+            this.gameObject.GetComponent<shipMovementScript>().SetTarget(null);
+            this.gameObject.GetComponent<shipMovementScript>().SetWeaponArmStatus(false);
+
+
+            jumpPosition = this.gameObject.transform.parent.transform.position;
+
+
+            if (isLongJumping)
+            {
+                fleetManagerObject.GetComponent<fleetManagerScript>().jumpedShips.Add(this.gameObject);
+                fleetManagerObject.GetComponent<fleetManagerScript>().jumpedShipsCounter++;
+            }
+            else
+            {
+                jumpIn();
+            }
+        }
         
-        this.gameObject.GetComponent<shipMovementScript>().SetTarget(null);
-        this.gameObject.GetComponent<shipMovementScript>().SetWeaponArmStatus(false);
-
-
-        jumpPosition = this.gameObject.transform.parent.transform.position;
-
-
-        if (isLongJumping)
-        {
-            fleetManagerObject.GetComponent<fleetManagerScript>().jumpedShips.Add(this.gameObject);
-            fleetManagerObject.GetComponent<fleetManagerScript>().jumpedShipsCounter++;
-        }
-        else
-        {
-            jumpIn();
-        }
 
 
 
@@ -174,7 +190,7 @@ public class shipStatsManagerScript : MonoBehaviour
         this.gameObject.GetComponent<shipMovementScript>().SetWeaponArmStatus(true);
 
 
-        jumpTimerCounter = Random.Range(minJumpTimer, maxJumpTimer);
+        jumpTimerCounter = maxJumpTimer;//Random.Range(minJumpTimer, maxJumpTimer);
         jumpedOut = false;
         this.gameObject.transform.parent.gameObject.transform.localScale = new Vector3(1, 1, 1);
 

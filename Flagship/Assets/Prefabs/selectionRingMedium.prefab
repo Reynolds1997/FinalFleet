@@ -65,7 +65,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 382186169484864259, guid: 9ffb22fc48edeb94c97ae40b5b87b2c9, type: 3}
       propertyPath: m_Name
-      value: selectionRingBig
+      value: selectionRingMedium
       objectReference: {fileID: 0}
     - target: {fileID: 382186169484864284, guid: 9ffb22fc48edeb94c97ae40b5b87b2c9, type: 3}
       propertyPath: m_Mesh
