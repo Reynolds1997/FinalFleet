@@ -2407,7 +2407,7 @@ MonoBehaviour:
   fitType: 4
   rows: 2
   columns: 5
-  cellSize: {x: 74.2, y: 107.45}
+  cellSize: {x: 64, y: 107.45}
   spacing: {x: 0, y: 0}
   fitX: 1
   fitY: 1
