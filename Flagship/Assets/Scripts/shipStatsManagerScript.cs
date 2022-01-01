@@ -67,6 +67,8 @@ public class shipStatsManagerScript : MonoBehaviour
 
     private Vector3 jumpFlareOffset = new Vector3(0, 2, 0);
 
+    public string jumpPointTag = "jumpPoint";
+
 
 
     // Start is called before the first frame update
@@ -147,6 +149,22 @@ public class shipStatsManagerScript : MonoBehaviour
         
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag(jumpPointTag))
+        {
+            isLongJumping = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag(jumpPointTag))
+        {
+            isLongJumping = false;
+        }
+    }
+
     public void jumpOut()
     {
         if(jumpTimerCounter <= 0)
@@ -176,11 +194,6 @@ public class shipStatsManagerScript : MonoBehaviour
             }
         }
         
-
-
-
-
-
         // print(this.name + " Jump Position " + jumpPosition);
     }
 

@@ -99,8 +99,6 @@ public class MiningBeamManager : MonoBehaviour
                 
             }
         }
-
-
     }
     private void OnTriggerExit(Collider other)
     {
