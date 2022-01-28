@@ -10,6 +10,7 @@ TagManager:
   - terrainObject
   - viewRadius
   - resourceNode
+  - jumpPoint
   layers:
   - Default
   - TransparentFX
