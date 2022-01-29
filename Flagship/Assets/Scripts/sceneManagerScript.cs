@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class sceneManagerScript : MonoBehaviour
 {
@@ -28,7 +29,14 @@ public class sceneManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            LoadLevel("MainMenu");
+        }
+        if (Input.GetKeyDown(KeyCode.Comma))
+        {
+            LoadLevel(SceneManager.GetActiveScene().name);
+        }
     }
 
     public void LoadScene()
@@ -53,5 +61,16 @@ public class sceneManagerScript : MonoBehaviour
         {
             Destroy(enemyShip);
         }
+    }
+
+
+    public void LoadLevel(string levelName)
+    {
+        SceneManager.LoadScene(levelName);
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }

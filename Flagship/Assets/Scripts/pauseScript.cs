@@ -21,6 +21,12 @@ public class pauseScript : MonoBehaviour
         {
             toggleSlowMotion();
         }
+
+        if (Input.GetButtonDown("Escape"))
+        {
+            togglePause();
+            
+        }
     }
 
 
@@ -35,6 +41,8 @@ public class pauseScript : MonoBehaviour
         {
             resumeGame();
         }
+
+        print("PAUSED: " + isPaused.ToString());
     }
 
     public void toggleSlowMotion()
