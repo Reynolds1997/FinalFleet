@@ -145,6 +145,10 @@ public class fleetManagerScript : MonoBehaviour
 
         if (selectedShips.Count > 0)
         {
+            if (selectedShips[0].GetComponent<shipMovementScript>() == null)
+            {
+                selectedShips.Remove(selectedShips[0]);
+            }
             bool newSetting = false;
             //TODO
             //What happens if the ship is destroyed? Fix this!
